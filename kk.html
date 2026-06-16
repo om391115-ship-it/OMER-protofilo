@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Omer's World | 5-Page Personal Website</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* Dark blue main background */
+      background: #0a1a2f;  /* deep dark blue */
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Main card – white background, black text */
+    .website-container {
+      max-width: 1100px;
+      width: 100%;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    /* Header area with black & dark blue accents */
+    .site-header {
+      background: #0b2b44;  /* darker blue variant */
+      padding: 1.2rem 2rem;
+      color: white;
+      border-bottom: 3px solid black;
+    }
+
+    .site-header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .site-header p {
+      opacity: 0.85;
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Navigation buttons: black + white text */
+    .nav-bar {
+      background: black;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+      padding: 0.6rem 1rem;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      background: #1e2a3a;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      margin: 0 0.2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+
+    .nav-btn:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn.active {
+      background: #0a5b8c;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border-bottom: 2px solid white;
+    }
+
+    /* content panel */
+    .pages-container {
+      padding: 2rem 2rem 2rem 2rem;
+      background: white;
+      color: black;
+      min-height: 500px;
+    }
+
+    .page {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+
+    .page.active-page {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* Typography & cards (white bg, black text) */
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-left: 6px solid #0a1a2f;
+      padding-left: 1rem;
+      color: #0a1a2f;
+    }
+
+    h3 {
+      margin: 1rem 0 0.5rem;
+      color: #0b2b44;
+    }
+
+    .bio-card, .interest-grid, .school-detail {
+      background: #f9fafc;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .interest-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: white;
+    }
+
+    .interest-item {
+      background: #eef2ff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      color: #0a1a2f;
+      border: 1px solid #cbd5e1;
+    }
+
+    .fact-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .fact-list li {
+      margin-bottom: 0.7rem;
+      padding-left: 1.6rem;
+      position: relative;
+    }
+    .fact-list li::before {
+      content: "✨";
+      position: absolute;
+      left: 0;
+      color: #0a5b8c;
+    }
+
+    /* quiz styles */
+    .quiz-question {
+      background: #f8fafc;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.2rem;
+      border-radius: 1.2rem;
+      border-left: 5px solid #0a1a2f;
+    }
+    .quiz-question p {
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .quiz-question label {
+      display: inline-block;
+      margin-right: 1.2rem;
+      margin-bottom: 0.4rem;
+      font-weight: normal;
+    }
+    button {
+      background: #0a1a2f;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: 500;
+    }
+    button:hover {
+      background: black;
+      transform: scale(0.98);
+    }
+    .quiz-result {
+      margin-top: 1.5rem;
+      background: #e6f0fa;
+      padding: 1rem;
+      border-radius: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    footer {
+      background: #f1f5f9;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #1e293b;
+      border-top: 1px solid #cbd5e1;
+    }
+
+    @media (max-width: 650px) {
+      .nav-btn {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.8rem;
+      }
+      .pages-container {
+        padding: 1.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="website-container">
+  <div class="site-header">
+    <h1>🌍 Omer Mohammed Omer</h1>
+    <p>Ethiopian International School | Riyadh | 19 years old</p>
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-btn active" data-page="page1">📄 Home</button>
+    <button class="nav-btn" data-page="page2">❤️ Interests</button>
+    <button class="nav-btn" data-page="page3">🏫 School & Culture</button>
+    <button class="nav-btn" data-page="page4">✨ More About Me</button>
+    <button class="nav-btn" data-page="page5">📝 Quiz on Me</button>
+  </div>
+
+  <div class="pages-container">
+    <!-- PAGE 1: INTRODUCTION -->
+    <div id="page1" class="page active-page">
+      <h2>👋 Hello, I'm Omer!</h2>
+      <div class="bio-card">
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Welcome to my very first website — simple, clean, and built with dark blue, white & black. I'm excited to share a little about myself.</p>
+        <p><strong>Full name:</strong> Omer Mohammed Omer</p>
+        <p><strong>Age:</strong> 19 years old</p>
+        <p><strong>School:</strong> Ethiopian International School in Riyadh, Saudi Arabia</p>
+        <p><strong>Passions:</strong> Exploring new activities, traveling, good food, and fashion.</p>
+        <p><strong>Community:</strong> Active participant in Eritrean Culture Day & Club Day.</p>
+      </div>
+      <div style="margin-top: 1.2rem; background: #eef2ff; padding: 0.8rem 1.2rem; border-radius: 1rem;">
+        💡 "Keep it simple, stay curious, and build step by step." – This website has 5 pages, and the last one is a fun quiz about me. Enjoy!
+      </div>
+    </div>
+
+    <!-- PAGE 2: INTERESTS (travel, activities, food, fashion) -->
+    <div id="page2" class="page">
+      <h2>🌟 Things I Truly Enjoy</h2>
+      <div class="interest-grid">
+        <div class="interest-item">⚽ Different Activities (sports, creative challenges)</div>
+        <div class="interest-item">✈️ Traveling & Exploring</div>
+        <div class="interest-item">🍲 Good Food (local & international)</div>
+        <div class="interest-item">👕 Fashion & Self-expression</div>
+      </div>
+      <div class="bio-card">
+        <p>I believe life is about variety. Whether it’s trying a new sport, discovering a hidden café in Riyadh, or putting together a fresh outfit — I enjoy every bit. Traveling inspires me to appreciate different cultures, and good food always brings people together.</p>
+        <p style="margin-top: 0.6rem;">🔹 <strong>Favorite cuisines:</strong> Eritrean (injera + zigni), Japanese, and Italian.</p>
+        <p>🔹 <strong>Fashion style:</strong> Casual & smart – I love clean sneakers and simple layers.</p>
+      </div>
+    </div>
+
+    <!-- PAGE 3: SCHOOL & CULTURE (Ethiopian Intl School, Eritrean Culture Day, Club Day) -->
+    <div id="page3" class="page">
+      <h2>📚 School Life & Cultural Pride</h2>
+      <div class="school-detail">
+        <h3>🏫 Ethiopian International School – Riyadh</h3>
+        <p>I am proud to be part of this diverse community. The school encourages us to celebrate our roots while learning in an international environment. I've made great friends and discovered many opportunities.</p>
+      </div>
+      <div class="school-detail">
+        <h3>🇪🇷 Eritrean Culture Day</h3>
+        <p>One of the most meaningful events I take part in. I help organize traditional music, coffee ceremonies, and showcase Eritrean history. It connects me to my heritage and teaches others about our beautiful traditions.</p>
+      </div>
+      <div class="school-detail">
+        <h3>🎉 Club Day</h3>
+        <p>Club Day is full of energy! I collaborate with different student clubs – from arts to volunteering. It’s a fantastic way to share ideas, recruit new members, and make school life exciting.</p>
+      </div>
+      <p style="margin-top: 0.6rem; font-style: italic;">✨ I'm always happy to welcome anyone who wants to learn about Eritrean culture or join our school clubs.</p>
+    </div>
+
+    <!-- PAGE 4: MORE ABOUT ME (fun facts, personality) -->
+    <div id="page4" class="page">
+      <h2>🎯 A Few Extra Facts</h2>
+      <div class="bio-card">
+        <ul class="fact-list">
+          <li>🗣️ I speak English, Arabic, and basic Tigrinya (still learning!)</li>
+          <li>🌍 I've traveled to Eritrea, Ethiopia, UAE and hope to visit Japan soon.</li>
+          <li>🍛 My comfort food: a warm plate of kicha fit-fit or shahan ful.</li>
+          <li>👟 I collect sneakers and love minimalistic streetwear.</li>
+          <li>🎧 I listen to a mix of Eritrean music, Afrobeat, and lo-fi while studying.</li>
+          <li>🏅 I help organize events for both Culture Day and Club Day – teamwork makes the dream work.</li>
+        </ul>
+      </div>
+      <div style="background: #e9ecef; border-radius: 1rem; padding: 1rem; margin-top: 1rem;">
+        <p>📸 <strong>Beginner coder note:</strong> This is my first website. I learned to use HTML, CSS, and a bit of JavaScript to build 5 pages in one file. The quiz on the next page is all about me — have fun testing your knowledge!</p>
+      </div>
+    </div>
+
+    <!-- PAGE 5: QUIZ ABOUT MYSELF -->
+    <div id="page5" class="page">
+      <h2>📝 How well do you know Omer?</h2>
+      <p style="margin-bottom: 1rem;">Answer the following questions about me. Each question has one correct answer. Good luck!</p>
+
+      <form id="quizForm">
+        <!-- Q1 -->
+        <div class="quiz-question">
+          <p>1️⃣ What is my full name?</p>
+          <label><input type="radio" name="q1" value="wrong1"> Ahmed Omer</label>
+          <label><input type="radio" name="q1" value="correct"> Omer Mohammed Omer</label>
+          <label><input type="radio" name="q1" value="wrong2"> Mohammed Omer Ali</label>
+          <label><input type="radio" name="q1" value="wrong3"> Omer Khalid</label>
+        </div>
+        <!-- Q2 -->
+        <div class="quiz-question">
+          <p>2️⃣ How old am I?</p>
+          <label><input type="radio" name="q2" value="wrong"> 18 years</label>
+          <label><input type="radio" name="q2" value="correct"> 19 years</label>
+          <label><input type="radio" name="q2" value="wrong2"> 20 years</label>
+          <label><input type="radio" name="q2" value="wrong3"> 17 years</label>
+        </div>
+        <!-- Q3 -->
+        <div class="quiz-question">
+          <p>3️⃣ Which school do I attend?</p>
+          <label><input type="radio" name="q3" value="wrong"> Riyadh Modern School</label>
+          <label><input type="radio" name="q3" value="correct"> Ethiopian International School in Riyadh</label>
+          <label><input type="radio" name="q3" value="wrong2"> Saudi National Academy</label>
+          <label><input type="radio" name="q3" value="wrong3"> Eritrean Community School</label>
+        </div>
+        <!-- Q4 -->
+        <div class="quiz-question">
+          <p>4️⃣ Which cultural event do I actively take part in?</p>
+          <label><input type="radio" name="q4" value="wrong"> Saudi National Day</label>
+          <label><input type="radio" name="q4" value="correct"> Eritrean Culture Day</label>
+          <label><input type="radio" name="q4" value="wrong2"> Ethiopian Coffee Festival</label>
+          <label><input type="radio" name="q4" value="wrong3"> International Food Fair</label>
+        </div>
+        <!-- Q5 -->
+        <div class="quiz-question">
+          <p>5️⃣ Which of these is one of my biggest interests? (based on my site)</p>
+          <label><input type="radio" name="q5" value="wrong"> Extreme sports</label>
+          <label><input type="radio" name="q5" value="correct"> Traveling & exploring</label>
+          <label><input type="radio" name="q5" value="wrong2"> Watching TV all day</label>
+          <label><input type="radio" name="q5" value="wrong3"> Collecting stamps</label>
+        </div>
+        <!-- Q6 Bonus: Club Day involvement -->
+        <div class="quiz-question">
+          <p>6️⃣ Apart from Culture Day, what other school event do I join?</p>
+          <label><input type="radio" name="q6" value="wrong"> Science Fair</label>
+          <label><input type="radio" name="q6" value="wrong2"> Sports Tournament</label>
+          <label><input type="radio" name="q6" value="correct"> Club Day</label>
+          <label><input type="radio" name="q6" value="wrong3"> Art Exhibition</label>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+          <button type="button" id="submitQuiz">✅ Submit my answers</button>
+          <button type="button" id="resetQuiz">🔄 Reset quiz</button>
+        </div>
+      </form>
+      <div id="quizResultMessage" class="quiz-result" style="display: none;"></div>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #2c3e50;"><i>All answers are based on the information I shared on this website. Have fun!</i></p>
+    </div>
+  </div>
+  <footer>
+    © 2025 Omer Mohammed Omer – Ethiopian International School, Riyadh | First website project | Dark blue, white & black theme | 5 pages including quiz
+  </footer>
+</div>
+
+<script>
+  // -------- 5 PAGE NAVIGATION (show/hide) --------
+  const pages = document.querySelectorAll('.page');
+  const navBtns = document.querySelectorAll('.nav-btn');
+
+  function showPage(pageId) {
+    // hide all pages
+    pages.forEach(page => {
+      page.classList.remove('active-page');
+    });
+    const activePage = document.getElementById(pageId);
+    if (activePage) activePage.classList.add('active-page');
+    
+    // update active button style
+    navBtns.forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('data-page') === pageId) {
+        btn.classList.add('active');
+      }
+    });
+  }
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const pageId = btn.getAttribute('data-page');
+      if (pageId) showPage(pageId);
+    });
+  });
+
+  // ensure page1 active on load (already set in HTML, but just in case)
+  // -------- QUIZ LOGIC (page5) --------
+  const submitBtn = document.getElementById('submitQuiz');
+  const resetBtn = document.getElementById('resetQuiz');
+  const resultDiv = document.getElementById('quizResultMessage');
+
+  // correct answers mapping: each radio group name and expected value "correct"
+  const correctAnswers = {
+    q1: 'correct',
+    q2: 'correct',
+    q3: 'correct',
+    q4: 'correct',
+    q5: 'correct',
+    q6: 'correct'
+  };
+
+  function computeScore() {
+    let score = 0;
+    let total = Object.keys(correctAnswers).length;
+    for (let [qName, correctVal] of Object.entries(correctAnswers)) {
+      const selectedRadio = document.querySelector(`input[name="${qName}"]:checked`);
+      if (selectedRadio && selectedRadio.value === correctVal) {
+        score++;
+      }
+    }
+    return { score, total };
+  }
+
+  function displayResult() {
+    const { score, total } = computeScore();
+    let message = '';
+    if (score === total) {
+      message = `🎉 Perfect! ${score}/${total} – You really know me! Thanks for reading my website. 🎉`;
+    } else if (score >= 4) {
+      message = `👍 Great job! You got ${score}/${total} correct. You've been paying attention!`;
+    } else if (score >= 2) {
+      message = `😊 You got ${score}/${total}. Read a bit more about me on pages 1-4 and try again!`;
+    } else {
+      message = `📚 Hmm, you got ${score}/${total}. Explore my interests, school, and fun facts – then retake the quiz!`;
+    }
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = message;
+    // smooth scroll to result
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetQuiz() {
+    // clear all radio selections
+    const allRadios = document.querySelectorAll('#quizForm input[type="radio"]');
+    allRadios.forEach(radio => radio.checked = false);
+    resultDiv.style.display = 'none';
+    resultDiv.innerHTML = '';
+  }
+
+  submitBtn.addEventListener('click', displayResult);
+  resetBtn.addEventListener('click', resetQuiz);
+
+  // Optional: when switching to page5, reset result visibility? not forced to reset but fine.
+  // keep it as user friendly. Also if any page uses auto-reset not needed.
+  // But we also ensure that resultDiv hidden on new quiz start (reset handles)
+  // Also add note: load page5 without showing result initially.
+  // If user already submitted and switches pages, the result stays hidden until they return? but fine.
+  // Additional: to avoid conflict with radio groups and page switching, nothing else needed.
+</script>
+</body>
+</html>
